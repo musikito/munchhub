@@ -22,7 +22,7 @@ const productSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
-    continents: {
+    region: {
       type: Number,
       default: 1,
     },
@@ -38,6 +38,13 @@ const productSchema = mongoose.Schema(
     category: {
       type: String,
       // required: true,
+    },
+    subcategory: {
+      type: String,
+      // required: true,
+    },
+    onHand: {
+      default: 0,
     },
   },
   { timestamps: true }

@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
-import { Menu, Icon, Badge } from 'antd';
-import axios from 'axios';
-import { USER_SERVER } from '../../../Config';
-import { withRouter } from 'react-router-dom';
+import { Badge, Icon, Menu } from "antd";
+import axios from "axios";
+import React from "react";
 import { useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { USER_SERVER } from "../../../Config";
 
 function RightMenu(props) {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
 
   const logoutHandler = () => {
-    axios.get(`${USER_SERVER}/logout`).then(response => {
+    axios.get(`${USER_SERVER}/logout`).then((response) => {
       if (response.status === 200) {
         props.history.push("/login");
       } else {
-        alert('Log Out Failed')
+        alert("Log Out Failed");
       }
     });
   };
@@ -29,11 +29,10 @@ function RightMenu(props) {
           <a href="/register">Signup</a>
         </Menu.Item>
       </Menu>
-    )
+    );
   } else {
     return (
       <Menu mode={props.mode}>
-
         <Menu.Item key="history">
           <a href="/history">History</a>
         </Menu.Item>
@@ -41,23 +40,27 @@ function RightMenu(props) {
         <Menu.Item key="upload">
           <a href="/product/upload">Upload</a>
         </Menu.Item>
+        <Menu.Item key="createcat">
+          <a href="/createcat">Create Category</a>
+        </Menu.Item>
 
         <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
           <Badge count={user.userData && user.userData.cart.length}>
-            <a href="/user/cart" style={{ marginRight: -22 , color:'#667777'}}>
-              <Icon type="shopping-cart" style={{ fontSize: 30, marginBottom: 3 }} />
+            <a href="/user/cart" style={{ marginRight: -22, color: "#667777" }}>
+              <Icon
+                type="shopping-cart"
+                style={{ fontSize: 30, marginBottom: 3 }}
+              />
             </a>
           </Badge>
         </Menu.Item>
-
 
         <Menu.Item key="logout">
           <a onClick={logoutHandler}>Logout</a>
         </Menu.Item>
       </Menu>
-    )
+    );
   }
 }
 
 export default withRouter(RightMenu);
-
